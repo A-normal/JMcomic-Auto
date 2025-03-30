@@ -8,16 +8,16 @@ import jmcomic
 import logging
 
 # 日志文件路径
-LOG_PATH = '/data/jmauto.txt'
+LOG_PATH = '/data/jmauto.log'
 # 下载配置文件路径
-OPTION_PATH = '/data/option.yml'
+OPTION_PATH = '/data/option-docker.yml'
 # 监控文件路径
 PACK_PATH = '/data/pack.txt'
 # 下载历史记录路径
 HISTORY_PATH = '/data/history.txt'
 
 # 延时处理等待时间
-DELAY_TIME = 100
+DELAY_TIME = 10
 """
 日志级别：该日志仅限自动下载模块，使用以下几个标志位控制，请按需更改
 LOG_HISTORY：仅打印处理的历史记录日志，只有处理行和历史记录文件写入日志
