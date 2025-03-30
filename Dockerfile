@@ -14,8 +14,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
 # 复制依赖文件并安装，注意手动安装jmcomic模块
-COPY requirements-dev.txt .
-RUN pip install --no-cache-dir -r requirements-dev.txt && \
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir .
 
 # 复制应用程序代码
