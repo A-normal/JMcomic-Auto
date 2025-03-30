@@ -1,0 +1,12 @@
+INFO:root:监控目标:
+路径: D:\Library\Repository\JM-Auto\tests\pack.txt
+目录: D:\Library\Repository\JM-Auto\tests
+文件名: pack.txt
+INFO:root:开始监控文件: D:\Library\Repository\JM-Auto\tests\pack.txt
+INFO:root:文件已修改: D:\Library\Repository\JM-Auto\tests\pack.txt
+INFO:root:检测到文件修改，等待 10 秒后处理...
+INFO:root:处理ID: 566738
+INFO:root:已将历史记录添加到 history.txt
+INFO:root:文件已修改: D:\Library\Repository\JM-Auto\tests\pack.txt
+INFO:root:检测到文件修改，等待 10 秒后处理...
+INFO:root:pack.txt文件为空，无需处理。

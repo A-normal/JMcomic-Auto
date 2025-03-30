@@ -8,14 +8,13 @@ import jmcomic
 import logging
 
 # 日志文件路径
-LOG_PATH = '/data/jmauto.log'
+LOG_PATH = './jmauto.log'
 # 下载配置文件路径
-OPTION_PATH = '/data/option-docker.yml'
-# 监控文件路径
-PACK_PATH = '/data/pack.txt'
+OPTION_PATH = './option.yml'
+# 要监控的文件路径
+pack_path = "./pack.txt"
 # 下载历史记录路径
-HISTORY_PATH = '/data/history.txt'
-
+HISTORY_PATH = './history.txt'
 # 延时处理等待时间
 DELAY_TIME = 10
 """
@@ -86,6 +85,7 @@ class FileChangeHandler(FileSystemEventHandler):
                 if LOG_ALL | LOG_RUN | LOG_HISTORY:
                     logging.info(f"处理ID: {id_value}")
 
+                # 在此添加自定义逻辑（如调用API、写入数据库等）
                 # 注意配置文件路径，默认为项目根目录
                 jmcomic.create_option_by_file(OPTION_PATH).download_album(id_value)
                 # 添加处理记录
@@ -107,7 +107,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
 if __name__ == "__main__":
     # 获取绝对路径和目录
-    target_abspath = os.path.abspath(PACK_PATH)
+    target_abspath = os.path.abspath(pack_path)
     target_dir = os.path.dirname(target_abspath)
     target_filename = os.path.basename(target_abspath)
 

@@ -10,8 +10,6 @@ client:
     type: cffi
   retry_times: 5
 dir_rule:
-  # 该处为你clone的本地仓库地址
-  base_dir: /app/
   rule: Bd_Pname
 download:
   cache: true
