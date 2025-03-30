@@ -11,8 +11,8 @@ client:
   retry_times: 5
 dir_rule:
   # 该处为你clone的本地仓库地址
-  # base_dir: /app/
-  base_dir: D:\Library\Repository\JMComic-Crawler-Python
+  base_dir: /app/
+  # base_dir: D:\Library\Repository\JMComic-Crawler-Python
   rule: Bd_Pname
 download:
   cache: true
@@ -33,7 +33,7 @@ plugins:
       # 如果level=[photo], filename_rule只能写Pxxx
       # 如果level=[album], filename_rule只能写Axxx
       # 该处路径为希望压缩文件存放的文件夹，请自行修改
-      # zip_dir: /data/Auto_Download/ # 压缩文件存放的文件夹
-      zip_dir: D:/Files/Comic/本子/Auto_Download # 压缩文件存放的文件夹
+      zip_dir: /data/Auto_Download/ # 压缩文件存放的文件夹
+      # zip_dir: D:/Files/Comic/本子/Auto_Download # 压缩文件存放的文件夹
       delete_original_file: true # 压缩成功后，删除所有原文件和文件夹
 version: '2.1'

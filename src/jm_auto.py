@@ -2,29 +2,19 @@ import time
 import os
 import re
 import threading
-from watchdog.observers import Observer
 from watchdog.observers.polling import PollingObserver
 from watchdog.events import FileSystemEventHandler
 import jmcomic
 import logging
 
 # 日志文件路径
-LOG_PATH = './jmauto.txt'
+LOG_PATH = 'D:\Library\Repository\JM-Auto\jmauto.log'
 # 下载配置文件路径
-OPTION_PATH = './option.yml'
-# 监控文件路径
-PACK_PATH = './pack.txt'
+OPTION_PATH = 'D:\Library\Repository\JM-Auto\option.yml'
+# 要监控的文件路径
+pack_path = "D:\Library\Repository\JM-Auto\pack.txt"
 # 下载历史记录路径
-HISTORY_PATH = './history.txt'
-
-# # 日志文件路径
-# LOG_PATH = '/data/jmauto.txt'
-# # 下载配置文件路径
-# OPTION_PATH = '/data/option.yml'
-# # 监控文件路径
-# PACK_PATH = '/data/pack.txt'
-# # 下载历史记录路径
-# HISTORY_PATH = '/data/history.txt'
+HISTORY_PATH = 'D:\Library\Repository\JM-Auto\history.txt'
 # 延时处理等待时间
 DELAY_TIME = 10
 """
@@ -35,8 +25,8 @@ LOG_ALL：打印全部日志，包含启停日志
 
     如需修改JMcomic模块日志，请前往option.yml
 """
-LOG_HISTORY = True
-LOG_RUN = True
+LOG_HISTORY = False
+LOG_RUN = False
 LOG_ALL = True
 
 # 修改日志配置
@@ -117,7 +107,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
 if __name__ == "__main__":
     # 获取绝对路径和目录
-    target_abspath = os.path.abspath(PACK_PATH)
+    target_abspath = os.path.abspath(pack_path)
     target_dir = os.path.dirname(target_abspath)
     target_filename = os.path.basename(target_abspath)
 
