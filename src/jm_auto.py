@@ -7,6 +7,8 @@ from watchdog.events import FileSystemEventHandler
 import jmcomic
 import logging
 
+# 该代码为容器镜像准备代码，不适合直接在本地运行，请参考README指引前往运行/tests/test.py
+
 # 日志文件路径
 LOG_PATH = '/data/jmauto.log'
 # 下载配置文件路径
