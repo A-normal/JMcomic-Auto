@@ -7,7 +7,7 @@
 
 ## 功能特性
 
-- 📁 监控 `pack.txt` 文件变化，自动解析、下载并打包（默认打包，如有需要请参考(https://github.com/hect0x7/JMComic-Crawler-Python/blob/master/assets/docs/sources/option_file_syntax.md#3-option%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%A1%B9)配置option.yml文件）
+- 📁 监控 `pack.txt` 文件变化，自动解析、下载并打包（默认打包，如有需要请参考(https://github.com/hect0x7/JMComic-Crawler-Python/blob/master/assets/docs/sources/option_file_syntax.md#3-option%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%A1%B9) 配置option.yml文件）
 - 📦 集成 JMComic-Crawler 下载核心功能
 - 🐳 提供 Docker 镜像部署方案
 - ⏲️ 可配置轮询间隔时间（默认 100 秒）（开发中，目前为默认配置无法修改）
@@ -47,9 +47,11 @@ bjrsteam1848/jmcomic-auto
 - 注意：***镜像自身并没有配置代理***，因此如果下载失败就应该考虑自己的网络问题了
 
 - 以下附容器工作文件夹结构，如有必要请根据自身需求调整容器配置：
+```bash
 /data/
 ├──Auto_Download/        # 漫画打包目录（必须）
 ├──pack.txt              # 监控文件（必须）
 ├──option.yml            # 下载配置
 ├──history.yml           # 下载历史记录
 └──jmauto.log            # 运行日志
+```
