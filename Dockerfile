@@ -2,20 +2,19 @@
 # 如有需要，使用该文件替换已有的Dockerfile文件
 # 前排提示：二段构建消耗时间较长（>500s）且极度依赖网络环境，如果不是确实需要严格控制镜像体积，开发版本（RE）与当前版本（SLIM）功能上并无任何区别，更建议使用前者
 # 阶段1：构建阶段（安装依赖并编译）
-FROM python:3.11-slim-bullseye as builder
+FROM python:3.11-slim-bullseye AS builder
 
 RUN apt-get update && \
-    apt-get install -y git build-essential python3-dev && \
+    apt-get install -y build-essential python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # 克隆源码
-RUN git clone https://github.com/A-normal/JMComic-Crawler-Python.git /app
+COPY / /app
 WORKDIR /app
 
-# 安装项目到临时目录（避免污染系统路径）
+# 安装项目依赖
 COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt && \
-    pip install --user --no-cache-dir . 
+RUN pip install --no-cache-dir -r requirements.txt
 
 # 阶段2：运行阶段（仅保留必要文件）
 FROM python:3.11-slim-bullseye

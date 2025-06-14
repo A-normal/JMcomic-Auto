@@ -1,12 +1,17 @@
-INFO:root:���Ŀ��:
-·��: D:\Library\Repository\JM-Auto\tests\pack.txt
-Ŀ¼: D:\Library\Repository\JM-Auto\tests
-�ļ���: pack.txt
-INFO:root:��ʼ����ļ�: D:\Library\Repository\JM-Auto\tests\pack.txt
-INFO:root:�ļ����޸�: D:\Library\Repository\JM-Auto\tests\pack.txt
-INFO:root:��⵽�ļ��޸ģ��ȴ� 10 �����...
-INFO:root:����ID: 566738
-INFO:root:�ѽ���ʷ��¼���ӵ� history.txt
-INFO:root:�ļ����޸�: D:\Library\Repository\JM-Auto\tests\pack.txt
-INFO:root:��⵽�ļ��޸ģ��ȴ� 10 �����...
-INFO:root:pack.txt�ļ�Ϊ�գ����账����
+INFO:root:[2025-06-15 00:59:12] 开始监控文件: /data/pack.txt
+INFO:root:[2025-06-15 00:59:33] 检测到文件修改，等待 100 秒后处理...
+INFO:root:[2025-06-15 00:59:43] 处理ID: 566738
+INFO:root:[2025-06-15 01:00:23] 已将 566738 添加到历史记录
+INFO:root:[2025-06-15 01:00:23] 已将历史记录添加到 history.txt
+INFO:root:[2025-06-15 01:00:23] 检测到文件修改，等待 100 秒后处理...
+INFO:root:[2025-06-15 01:00:33] pack.txt文件为空，无需处理。
+INFO:root:[2025-06-15 01:00:50] 检测到文件修改，等待 100 秒后处理...
+INFO:root:[2025-06-15 01:01:00] 处理ID: 417020
+INFO:root:[2025-06-15 01:01:06] 处理ID 417020 时发生错误: 请求的本子不存在！(https://18comic.vip/album/417020/)
+原因可能为:
+1. id有误，检查你的本子id
+2. 该漫画只对登录用户可见，请配置你的cookies，或者使用移动端Client（api）
+
+INFO:root:[2025-06-15 01:01:06] 已将历史记录添加到 history.txt
+INFO:root:[2025-06-15 01:01:06] 检测到文件修改，等待 100 秒后处理...
+INFO:root:[2025-06-15 01:01:16] pack.txt文件为空，无需处理。
