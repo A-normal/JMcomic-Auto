@@ -56,10 +56,12 @@ LOG_ALL = config['log_all']
 # 修改日志配置
 logging.basicConfig(
     handlers=[
-        logging.FileHandler(LOG_PATH),
+        logging.FileHandler(LOG_PATH, encoding='utf-8'),
         logging.StreamHandler(),
     ],
-    level=logging.INFO
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='[%Y-%m-%d %H:%M:%S]'
 )
 
 # 处理文件修改事件
@@ -85,8 +87,7 @@ class FileChangeHandler(FileSystemEventHandler):
                 self.timer = threading.Timer(self.delay, self.process_pack_file, args=(event.src_path,))
                 self.timer.start()
                 if LOG_ALL | LOG_RUN :
-                    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    logging.info(f"[{current_time}] 检测到文件修改，等待 {self.delay} 秒后处理...")
+                    logging.info(f"检测到文件修改，等待 {self.delay} 秒后处理...")
 
     def process_pack_file(self, PACK_PATH):
         # 读取pack.txt中的所有行
@@ -94,8 +95,7 @@ class FileChangeHandler(FileSystemEventHandler):
             lines = f.readlines()
         
         if (not lines) & (LOG_ALL | LOG_RUN):
-            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            logging.info(f"[{current_time}] pack.txt文件为空，无需处理。")
+            logging.info(f"pack.txt文件为空，无需处理。")
             return
 
         # 使用正则表达式匹配5到7位数字
@@ -106,8 +106,7 @@ class FileChangeHandler(FileSystemEventHandler):
             id_value = line.strip()
             if pattern.match(id_value):
                 if LOG_ALL | LOG_RUN | LOG_HISTORY:
-                    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    logging.info(f"[{current_time}] 处理ID: {id_value}")
+                    logging.info(f"处理ID: {id_value}")
                 try:
                     # 在此添加自定义逻辑（如调用API、写入数据库等）
                     # 注意配置文件路径，默认为项目根目录
@@ -119,13 +118,11 @@ class FileChangeHandler(FileSystemEventHandler):
                         f.write(f"[{current_time}] {id_value}\n")
                     
                     if LOG_ALL | LOG_RUN | LOG_HISTORY:
-                        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                        logging.info(f"[{current_time}] 已将 {id_value} 添加到历史记录")
+                        logging.info(f"已将 {id_value} 添加到历史记录")
         
                 except Exception as e:
                     if LOG_ALL | LOG_RUN | LOG_HISTORY:
-                        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                        logging.info(f"[{current_time}] 处理ID {id_value} 时发生错误: {str(e)}")
+                        logging.info(f"处理ID {id_value} 时发生错误: {str(e)}")
                     # 记录错误到历史文件
                     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     with open(HISTORY_PATH, "a", encoding='utf-8') as f:
@@ -137,8 +134,7 @@ class FileChangeHandler(FileSystemEventHandler):
             f.truncate()
 
         if LOG_ALL | LOG_RUN | LOG_HISTORY:
-            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            logging.info(f"[{current_time}] 已将历史记录添加到 history.txt")
+            logging.info(f"已将历史记录添加到 history.txt")
 
 if __name__ == "__main__":
     # 获取绝对路径和目录
@@ -156,9 +152,8 @@ if __name__ == "__main__":
     observer = PollingObserver()
     observer.schedule(event_handler, path=target_dir, recursive=False)
     observer.start()
-    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if LOG_ALL :
-        logging.info(f"[{current_time}] 开始监控文件: {target_abspath}")
+        logging.info(f"开始监控文件: {target_abspath}")
 
     try:
         while True:
@@ -169,7 +164,6 @@ if __name__ == "__main__":
         with event_handler.lock:
             if event_handler.timer is not None:
                 event_handler.timer.cancel()
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         if LOG_ALL :
-            logging.info(f"[{current_time}] 停止监控")
+            logging.info(f"停止监控")
     observer.join()
