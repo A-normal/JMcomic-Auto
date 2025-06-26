@@ -1,0 +1,18 @@
+# 自动下载配置
+jm_auto:
+  # 文件路径配置
+  log_path: './jmauto.log'           # 日志文件路径
+  option_path: './option.yml'        # 下载配置文件路径
+  pack_path: "./pack.txt"            # 要监控的文件路径
+  history_path: './history.txt'      # 下载历史记录路径
+  delay_time: 10                     # 延时处理等待时间
+  
+  # 日志级别配置
+  # 该日志仅限自动下载模块，使用以下几个标志位控制，请按需更改
+  # log_history: 仅打印处理的历史记录日志，只有处理行和历史记录，输出至history.txt
+  # log_run: 仅打印运行日志，包含运行日志，输出至jmcuto.log
+  # log_all: 打印全部日志，包含启停日志，输出至jmauto.log
+  log_history: false
+  log_run: false
+  log_all: true
+version: '1.0'

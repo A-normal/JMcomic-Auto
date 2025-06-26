@@ -7,28 +7,51 @@ from watchdog.events import FileSystemEventHandler
 import jmcomic
 import logging
 import datetime
+import yaml
 
-# 日志文件路径
-LOG_PATH = './jmauto.log'
-# 下载配置文件路径
-OPTION_PATH = './option.yml'
-# 要监控的文件路径
-PACK_PATH = "./pack.txt"
-# 下载历史记录路径
-HISTORY_PATH = './history.txt'
-# 延时处理等待时间
-DELAY_TIME = 10
-"""
-日志级别：该日志仅限自动下载模块，使用以下几个标志位控制，请按需更改
-LOG_HISTORY：仅打印处理的历史记录日志，只有处理行和历史记录，输出至history.txt
-LOG_RUN：仅打印运行日志，包含运行日志，输出至jmcuto.log
-LOG_ALL：打印全部日志，包含启停日志，输出至jmauto.log
+def load_config(config_path='./auto_option.yml'):
+    """從 option.yml 文件讀取配置"""
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+        
+        auto_config = config.get('jm_auto', {})
+        
+        return {
+            'log_path': auto_config.get('log_path', './jmauto.log'),
+            'option_path': auto_config.get('option_path', './option.yml'),
+            'pack_path': auto_config.get('pack_path', './pack.txt'),
+            'history_path': auto_config.get('history_path', './history.txt'),
+            'delay_time': auto_config.get('delay_time', 10),
+            'log_history': auto_config.get('log_history', False),
+            'log_run': auto_config.get('log_run', False),
+            'log_all': auto_config.get('log_all', True)
+        }
+    except Exception as e:
+        print(f"讀取配置文件失敗: {e}，使用默認配置")
+        return {
+            'log_path': './jmauto.log',
+            'option_path': './option.yml',
+            'pack_path': './pack.txt',
+            'history_path': './history.txt',
+            'delay_time': 10,
+            'log_history': False,
+            'log_run': False,
+            'log_all': True
+        }
 
-    如需修改JMcomic模块日志，请前往option.yml
-"""
-LOG_HISTORY = False
-LOG_RUN = False
-LOG_ALL = True
+# 读取配置
+config = load_config()
+
+# 获取配置值
+LOG_PATH = config['log_path']
+OPTION_PATH = config['option_path']
+PACK_PATH = config['pack_path']
+HISTORY_PATH = config['history_path']
+DELAY_TIME = config['delay_time']
+LOG_HISTORY = config['log_history']
+LOG_RUN = config['log_run']
+LOG_ALL = config['log_all']
 
 # 修改日志配置
 logging.basicConfig(
