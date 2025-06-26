@@ -56,3 +56,7 @@ bjrsteam1848/jmcomic-auto:latest
 ├──history.yml           # 下载历史记录
 └──jmauto.log            # 运行日志
 ```
+
+## 作者
+
+- 修仙者一号 (GitHub: [A-normal](https://github.com/A-normal))
