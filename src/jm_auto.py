@@ -20,10 +20,10 @@ def load_config(config_path='/data/auto_option.yml'):
         auto_config = config.get('jm_auto', {})
         
         return {
-            'log_path': auto_config.get('log_path', './jmauto.log'),
-            'option_path': auto_config.get('option_path', './option.yml'),
-            'pack_path': auto_config.get('pack_path', './pack.txt'),
-            'history_path': auto_config.get('history_path', './history.txt'),
+            'log_path': auto_config.get('log_path', '/data/jmauto.log'),
+            'option_path': auto_config.get('option_path', '/data/option.yml'),
+            'pack_path': auto_config.get('pack_path', '/data/pack.txt'),
+            'history_path': auto_config.get('history_path', '/data/history.txt'),
             'delay_time': auto_config.get('delay_time', 120),
             'log_history': auto_config.get('log_history', False),
             'log_run': auto_config.get('log_run', False),
@@ -32,10 +32,10 @@ def load_config(config_path='/data/auto_option.yml'):
     except Exception as e:
         print(f"读取配置文件失败: {e}，使用默认配置")
         return {
-            'log_path': './jmauto.log',
-            'option_path': './option.yml',
-            'pack_path': './pack.txt',
-            'history_path': './history.txt',
+            'log_path': '/data/jmauto.log',
+            'option_path': '/data/option.yml',
+            'pack_path': '/data/pack.txt',
+            'history_path': '/data/history.txt',
             'delay_time': 120,
             'log_history': False,
             'log_run': False,
