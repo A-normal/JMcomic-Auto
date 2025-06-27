@@ -8,7 +8,7 @@
 ## 功能特性
 
 - 📁 监控 `pack.txt` 文件变化，自动解析、下载并打包（默认打包，如有需要请参考(https://github.com/hect0x7/JMComic-Crawler-Python/blob/master/assets/docs/sources/option_file_syntax.md#3-option%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE%E9%A1%B9) 配置option.yml文件）
-- 📦 集成 JMComic-Crawler 下载核心功能
+- 📦 集成 JMComic-Crawler 下载核心功能 (由于下载命名文件目标，实际使用了复制后的自有库)
 - 🐳 提供 Docker 镜像部署方案
 - ⏲️ 可配置轮询间隔时间（默认 120 秒）
 
@@ -52,7 +52,7 @@ bjrsteam1848/jmcomic-auto:latest
 ├──Auto_Download/        # 漫画打包目录（必须）
 ├──pack.txt              # 监控文件（必须）
 ├──auto_option.yml       # 模块配置文件
-├──option.yml            # 下载配置
+├──option.yml            # 依赖配置文件
 ├──history.yml           # 下载历史记录
 └──jmauto.log            # 运行日志
 ```
@@ -60,3 +60,15 @@ bjrsteam1848/jmcomic-auto:latest
 ## 作者
 
 - 修仙者一号 (GitHub: [A-normal](https://github.com/A-normal))
+
+## 感谢以下项目
+
+### Python API For JMComic (禁漫天堂)
+
+<a href="https://github.com/hect0x7/JMComic-Crawler-Python">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/pin/?username=hect0x7&repo=JMComic-Crawler-Python&theme=radical" />
+    <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api/pin/?username=hect0x7&repo=JMComic-Crawler-Python" />
+    <img alt="Repo Card" src="https://github-readme-stats.vercel.app/api/pin/?username=hect0x7&repo=JMComic-Crawler-Python" />
+  </picture>
+</a>

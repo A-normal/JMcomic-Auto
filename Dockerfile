@@ -9,12 +9,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /app
 # 复制依赖文件并安装，注意手动安装jmcomic模块
 COPY requirements.txt .
-# RUN pip update
+# 安裝 git
+RUN apt-get update && apt-get install -y git
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 默认下载配置
+# 清理下载缓存
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+# 默认依赖配置
 COPY /public/option.yml /data/option.yml
-# 默认配置
+# 默认模块配置
 COPY /public/auto_option.yml /data/auto_option.yml
 # 历史记录留档
 COPY /public/history.txt /data/history.txt

@@ -10,6 +10,7 @@ client:
     type: cffi
   retry_times: 5
 dir_rule:
+  base_dir: ../
   rule: Bd_Pname
 download:
   cache: true
