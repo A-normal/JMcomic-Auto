@@ -88,7 +88,7 @@ class FileChangeHandler(FileSystemEventHandler):
                 # 创建新计时器，延迟执行处理
                 self.timer = threading.Timer(self.delay, self.process_pack_file, args=(event.src_path,))
                 self.timer.start()
-                if LOG_ALL | LOG_RUN :
+                if LOG_ALL or LOG_RUN :
                     logging.info(f"检测到文件修改，等待 {self.delay} 秒后处理...")
 
     def process_pack_file(self, PACK_PATH):
@@ -96,18 +96,18 @@ class FileChangeHandler(FileSystemEventHandler):
         with open(PACK_PATH, "r", encoding='utf-8') as f:
             lines = f.readlines()
         
-        if (not lines) & (LOG_ALL | LOG_RUN):
+        if (not lines) & (LOG_ALL or LOG_RUN):
             logging.info(f"pack.txt文件为空，无需处理。")
             return
 
         # 使用正则表达式匹配5到7位数字
-        pattern = re.compile(r"^\d{5,7}$")
+        pattern = re.compile(r"^\d{3,7}$")
 
         # 处理每一非空行
         for line in lines:
             id_value = line.strip()
             if pattern.match(id_value):
-                if LOG_ALL | LOG_RUN | LOG_HISTORY:
+                if LOG_ALL or LOG_RUN or LOG_HISTORY:
                     logging.info(f"处理ID: {id_value}")
                 try:
                     # 在此添加自定义逻辑（如调用API、写入数据库等）
@@ -119,11 +119,11 @@ class FileChangeHandler(FileSystemEventHandler):
                     with open(HISTORY_PATH, "a", encoding='utf-8') as f:
                         f.write(f"[{current_time}] {id_value}\n")
                     
-                    if LOG_ALL | LOG_RUN | LOG_HISTORY:
+                    if LOG_ALL or LOG_RUN or LOG_HISTORY:
                         logging.info(f"已将 {id_value} 添加到历史记录")
         
                 except Exception as e:
-                    if LOG_ALL | LOG_RUN | LOG_HISTORY:
+                    if LOG_ALL or LOG_RUN or LOG_HISTORY:
                         logging.info(f"处理ID {id_value} 时发生错误: {str(e)}")
                     # 记录错误到历史文件
                     current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -135,8 +135,8 @@ class FileChangeHandler(FileSystemEventHandler):
             f.seek(0)
             f.truncate()
 
-        if LOG_ALL | LOG_RUN | LOG_HISTORY:
-            logging.info(f"[已将历史记录添加到 history.txt")
+        if LOG_ALL or LOG_RUN or LOG_HISTORY:
+            logging.info(f"已将历史记录添加到 history.txt")
 
 if __name__ == "__main__":
     # 获取绝对路径和目录

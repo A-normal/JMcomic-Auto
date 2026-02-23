@@ -1,5 +1,23 @@
-# 使用官方Python精简镜像
-FROM python:3.11-slim-bullseye
+# 使用官方Python镜像
+FROM python:3.15.0a6-slim-trixie AS builder
+
+WORKDIR /app
+
+# 复制依赖文件并安装
+COPY requirements.txt .
+
+# 安裝 git 和编译工具以满足 Pillow 的安装需求
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    python3-dev \
+    libffi-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip install --prefix=/install -r requirements.txt
+
+FROM python:3.15.0a6-slim-trixie AS runtime
 
 # 设置容器时区（可选）
 ENV TZ=Asia/Shanghai
@@ -7,14 +25,17 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 创建工作目录
 WORKDIR /app
-# 复制依赖文件并安装，注意手动安装jmcomic模块
-COPY requirements.txt .
-# 安裝 git
-RUN apt-get update && apt-get install -y git
-RUN pip install --no-cache-dir -r requirements.txt
 
-# 清理下载缓存
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /install /usr/local
+
+RUN apt-get update && apt-get install -y \
+    git \
+    libjpeg62-turbo \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/A-normal/JMComic-Crawler-Python.git
+
+RUN pip install -e ./JMComic-Crawler-Python
 
 # 默认依赖配置
 COPY /public/option.yml /data/option.yml
